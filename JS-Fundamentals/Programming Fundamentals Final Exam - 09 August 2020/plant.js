@@ -1,49 +1,63 @@
 function solve(input) {
   let n = Number(input.shift());
   let obj = {};
-
+  const rarity = "rarity";
+  const rating = "rating";
   let commands = {
     Rate(plant, rating) {
       if (obj.hasOwnProperty(plant)) {
         obj[plant].rating.push(Number(rating));
+      } else {
+        console.log("error");
       }
     },
     Update(plant, newRarityr) {
       if (obj.hasOwnProperty(plant)) {
-        obj[plant].rarity.splice(0, 1, Number(newRarityr));
+        obj[plant].rarity = newRarityr;
+      } else {
+        console.log("error");
       }
     },
     Reset(plant) {
       if (obj.hasOwnProperty(plant)) {
         obj[plant].rating = [0];
+      } else {
+        console.log("error");
       }
     },
   };
 
+  input.splice(0, n).map((x) => {
+    const [plant, rarity] = x.split("<->");
+    obj[plant] = { rarity: +rarity, rating: [] };
+  });
   let line = input.shift();
-  while (n != 0) {
-    let [plant, rarity] = line.split("<->");
-    obj[plant] = {
-      rarity: [rarity],
-      rating: [],
-    };
-    n--;
-    line = input.shift();
-  }
-
   while (line != "Exhibition") {
     let [command, params] = line.split(": ");
     let tokens = params.split(" - ");
-    commands[command](tokens[0], tokens[1]);
+    commands[command](tokens[0], +tokens[1]);
     line = input.shift();
   }
-
-  let sort = Object.entries(obj).forEach((ele) => {
-    ele[1].rating = ele[1].rating
-      .reduce((a, b) => (a + b) / ele[1].rating.length)
-      .toFixed(2);
-      console.log(ele[1].rating.sort((a,b)=>a-b));
-  });F
+  let result = "";
+  console.log("Plants for the exhibition:");
+  Object.keys(obj).forEach((x) => {
+    let arr = obj[x].rating;
+    if (arr.length !== 0) {
+      obj[x].rating = arr.reduce((a, b) => a + b) / arr.length;
+    } else {
+      obj[x].rating = 0;
+    }
+  });
+  Object.keys(obj)
+    .sort(
+      (a, b) => obj[b].rarity - obj[a].rarity || obj[b].rating - obj[a].rating
+    )
+    .forEach((plant) => {
+      result += `- ${plant}; Rarity: ${obj[plant].rarity}; Rating: ${obj[
+        plant
+      ].rating.toFixed(2)}\n`;
+    });
+  console.log(result);
 }
 
 solve([
