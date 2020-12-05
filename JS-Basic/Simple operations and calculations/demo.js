@@ -1,5 +1,5 @@
 function hello() {
-    let ime = "Pesho";
+    let ime = "Dani";
     console.log(ime);
     console.log(ime);
     console.log(ime);
