@@ -18,7 +18,7 @@ function solve(input) {
         password.substring(0, Number(tokens[1])) +
         password.substring(Number(tokens[1]) + Number(tokens[2]));
     } else {
-      
+      password = 
     }
     
     line = input.shift();
