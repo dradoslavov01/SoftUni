@@ -18,12 +18,13 @@ function solve(input) {
         password.substring(0, Number(tokens[1])) +
         password.substring(Number(tokens[1]) + Number(tokens[2]));
     } else {
-      password = password.substring
+      password =
+        password.substring(0, Number(tokens[1])) +
+        password.substring(Number(tokens[1]) + Number(tokens[2]));
     }
-    
+
     line = input.shift();
   }
-  
 }
 solve([
   "Siiceercaroetavm!:?:ahsott.:i:nstupmomceqr ",
