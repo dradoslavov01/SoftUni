@@ -60,7 +60,7 @@ function solve(input) {
     commands = input.shift();
   }
   function compare(a, b) {
-    let result = b[1].hp - a[1].hp || a[0].localeCompare(b[0]);;
+    let result = b[1].hp - a[1].hp || a[0].localeCompare(b[0]);
     return result;
   }
   let sort = Object.entries(heroes)

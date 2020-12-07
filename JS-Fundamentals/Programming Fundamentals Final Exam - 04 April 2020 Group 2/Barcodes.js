@@ -4,7 +4,7 @@ function solve(input) {
   while (n != 0) {
     let line = input.shift();
     let regex = /(@#+)(?<product>[A-Z][A-Za-z0-9]{4,}[A-Z])\1/g;
-    let match = regex.exec(line);
+    let match = regex.match(line);
     if (match) {
       let product = match.groups.product;
       let matches = product.match(/\d+/g);
