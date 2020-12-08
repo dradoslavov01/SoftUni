@@ -12,34 +12,33 @@ function solve(input) {
       } else {
         console.log("Substring not found!");
       }
-
+    }
       if (command == "Flip") {
         if (tokens[0] == "Upper") {
-          rawKey =
-            rawKey.substring(0, Number(tokens[1])) +
-            rawKey.substring(Number(tokens[1]), Number(tokens[2]))
-              .toLocaleUpperCase() + rawKey.substring(Number(tokens[2]), rawKey.length - 1);
+          newKey =
+            newKey.substring(0, Number(tokens[1])) +
+            newKey.substring(Number(tokens[1]), Number(tokens[2]))
+              .toLocaleUpperCase() + newKey.substring(Number(tokens[2]), newKey.length);
               console.log(newKey);
         } else {
             newKey =
-            rawKey.substring(0, Number(tokens[1])) +
-            rawKey.substring(Number(tokens[1]), Number(tokens[2]))
-              .toLocaleLowerCase() + rawKey.substring(Number(tokens[2]), rawKey.length - 1);
+            newKey.substring(0, Number(tokens[1])) +
+            newKey.substring(Number(tokens[1]), Number(tokens[2]))
+              .toLocaleLowerCase() + newKey.substring(Number(tokens[2]), newKey.length);
               console.log(newKey);
         }
       }
 
       if (command == 'Slice') {
-          newKey = newKey.substring(0, +tokens[0]) + newKey
+          newKey = rawKey.substring(0, +tokens[0]) + rawKey.substring(+tokens[1], rawKey.length)
           console.log(newKey);
       }
 
-    }
-    // shift input
-    line = input.shift();
     
+    // shift input
+    line = input.shift(); 
   }
-  console.log(rawKey);
+  console.log(newKey);
 }
 
 solve([
