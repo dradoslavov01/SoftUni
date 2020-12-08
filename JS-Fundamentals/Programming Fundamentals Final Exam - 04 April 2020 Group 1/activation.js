@@ -35,8 +35,9 @@ function solve(input) {
       }
 
     }
-
+    // shift input
     line = input.shift();
+    
   }
   console.log(rawKey);
 }
