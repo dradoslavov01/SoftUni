@@ -1,43 +1,42 @@
 function solve(input) {
   let rawKey = input.shift();
-  let newKey = rawKey;
   let line = input.shift();
 
   while (line != "Generate") {
     let [command, ...tokens] = line.split(">>>");
 
     if (command == "Contains") {
-      if (newKey.includes(tokens[0])) {
-        console.log(`${newKey} contains ${tokens[0]}.`);
+      if (rawKey.includes(tokens[0])) {
+        console.log(`${rawKey} contains ${tokens[0]}.`);
       } else {
         console.log("Substring not found!");
       }
     }
       if (command == "Flip") {
         if (tokens[0] == "Upper") {
-          newKey =
-            newKey.substring(0, Number(tokens[1])) +
-            newKey.substring(Number(tokens[1]), Number(tokens[2]))
-              .toLocaleUpperCase() + newKey.substring(Number(tokens[2]), newKey.length);
-              console.log(newKey);
+          rawKey =
+            rawKey.substring(0, Number(tokens[1])) +
+            rawKey.substring(Number(tokens[1]), Number(tokens[2]))
+              .toLocaleUpperCase() + rawKey.substring(Number(tokens[2]), rawKey.length);
+              console.log(rawKey);
         } else {
-            newKey =
-            newKey.substring(0, Number(tokens[1])) +
-            newKey.substring(Number(tokens[1]), Number(tokens[2]))
-              .toLocaleLowerCase() + newKey.substring(Number(tokens[2]), newKey.length);
-              console.log(newKey);
+            rawKey =
+            rawKey.substring(0, Number(tokens[1])) +
+            rawKey.substring(Number(tokens[1]), Number(tokens[2]))
+              .toLocaleLowerCase() + rawKey.substring(Number(tokens[2]), rawKey.length);
+              console.log(rawKey);
         }
       }
 
       if (command == 'Slice') {
-          newKey = newKey.substring(0, +tokens[0]) + newKey.substring(+tokens[1], newKey.length)
-          console.log(newKey);
+          rawKey = rawKey.substring(0, +tokens[0]) + rawKey.substring(+tokens[1], rawKey.length)
+          console.log(rawKey);
       }
 
     
     line = input.shift(); 
   }
-  console.log(`Your activation key is: ${newKey}`);
+  console.log(`Your activation key is: ${rawKey}`);
 }
 
 solve([
