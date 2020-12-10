@@ -7,8 +7,8 @@ function solve(input) {
     let [command, ...tokens] = line.split(">>>");
 
     if (command == "Contains") {
-      if (rawKey.includes(tokens[0])) {
-        console.log(`${rawKey} contains ${tokens[0]}.`);
+      if (newKey.includes(tokens[0])) {
+        console.log(`${newKey} contains ${tokens[0]}.`);
       } else {
         console.log("Substring not found!");
       }
@@ -30,22 +30,23 @@ function solve(input) {
       }
 
       if (command == 'Slice') {
-          newKey = rawKey.substring(0, +tokens[0]) + rawKey.substring(+tokens[1], rawKey.length)
+          newKey = newKey.substring(0, +tokens[0]) + newKey.substring(+tokens[1], newKey.length)
           console.log(newKey);
       }
 
     
     line = input.shift(); 
   }
-  console.log(newKey);
+  console.log(`Your activation key is: ${newKey}`);
 }
 
 solve([
-  "abcdefghijklmnopqrstuvwxyz",
-  "Slice>>>2>>>6",
-  "Flip>>>Upper>>>3>>>14",
-  "Flip>>>Lower>>>5>>>7",
-  "Contains>>>def",
-  "Contains>>>deF",
-  "Generate",
+  '134softsf5ftuni2020rockz42',
+  'Slice>>>3>>>7',
+  'Contains>>>-rock',
+  'Contains>>>-uni-',
+  'Contains>>>-rocks',
+  'Flip>>>Upper>>>2>>>8',
+  'Flip>>>Lower>>>5>>>11',
+  'Generate'
 ]);
