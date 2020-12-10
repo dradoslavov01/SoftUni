@@ -1,6 +1,6 @@
 function solve(input) {
   let rawKey = input.shift();
-  let newKey = "";
+  let newKey = rawKey;
   let line = input.shift();
 
   while (line != "Generate") {
@@ -35,7 +35,6 @@ function solve(input) {
       }
 
     
-    // shift input
     line = input.shift(); 
   }
   console.log(newKey);
