@@ -1,51 +1,49 @@
 function solve(input) {
   let actions = {
-    Contains(rawKey, substring) {
-      if (rawKey.includes(substring)) {
-        console.log(`${rawKey} contains ${substring}`);
+    Contains(rawKey, substr) {
+      if (rawKey.includes(substr)) {
+        console.log(`${rawKey} contains ${substr}.`);
       } else {
         console.log("Substring not found!");
       }
       return rawKey;
     },
     Flip(rawKey, mode, start, end) {
-      start = Number(start);
-      end = Number(end);
+      [start, end] = [Number(start), Number(end)]
       let first = rawKey.substring(0, start);
       let second = rawKey.substring(start, end);
-      let third = rawKey.substring(end, rawKey.length);
-
+      let third = rawKey.substring(end);
+ 
       if (mode == "Upper") {
         second = second.toLocaleUpperCase();
-      } else if (mode == "Lower") {
+      } else {
         second = second.toLocaleLowerCase();
       }
-      let result = first + second + third;
-      console.log(result);
-      return result;
+      let newKey = first + second + third;
+      console.log(newKey);
+      return newKey;
     },
     Slice(rawKey, start, end) {
-      start = Number(start);
-      end = Number(end);
+      [start, end] = [Number(start), Number(end)]
       let first = rawKey.substring(0, start);
       let second = rawKey.substring(start, end);
-      let third = rawKey.substring(end, rawKey.length);
-      let result = first + third;
-      console.log(result);
-      return result;
-    },
+      let third = rawKey.substring(end);
+      let newKey = first + third;
+      console.log(newKey);
+      return newKey;
+    }
   };
+ 
   let rawKey = input.shift();
   let line;
-
-  while ((line = input.shift()) != "Generate") {
-    let [actionsName, ...params] = line.split(">>>");
-    let action = actions[actionsName];
-    rawKey = action(rawKey, ...params);
+ 
+  while((line = input.shift()) != 'Generate') {
+      let [actionsName, ...params] = line.split('>>>');
+      let action = actions[actionsName];
+      rawKey = action(rawKey, ...params)
   }
   console.log(`Your activation key is: ${rawKey}`);
 }
-
 solve([
   "134softsf5ftuni2020rockz42",
   "Slice>>>3>>>7",
