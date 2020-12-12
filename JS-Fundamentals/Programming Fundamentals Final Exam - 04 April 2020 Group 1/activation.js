@@ -1,51 +1,58 @@
 function solve(input) {
-  let rawKey = input.shift();
-  let line = input.shift();
-
-  while (line != "Generate") {
-    let [command, ...tokens] = line.split(">>>");
-
-    if (command == "Contains") {
-      if (rawKey.includes(tokens[0])) {
-        console.log(`${rawKey} contains ${tokens[0]}.`);
+  let actions = {
+    Contains(rawKey, substring) {
+      if (rawKey.includes(substring)) {
+        console.log(`${rawKey} contains ${substring}`);
       } else {
         console.log("Substring not found!");
       }
-    }
-      if (command == "Flip") {
-        if (tokens[0] == "Upper") {
-          rawKey =
-            rawKey.substring(0, Number(tokens[1])) +
-            rawKey.substring(Number(tokens[1]), Number(tokens[2]))
-              .toLocaleUpperCase() + rawKey.substring(Number(tokens[2]), rawKey.length);
-              console.log(rawKey);
-        } else {
-            rawKey =
-            rawKey.substring(0, Number(tokens[1])) +
-            rawKey.substring(Number(tokens[1]), Number(tokens[2]))
-              .toLocaleLowerCase() + rawKey.substring(Number(tokens[2]), rawKey.length);
-              console.log(rawKey);
-        }
-      }
+      return rawKey;
+    },
+    Flip(rawKey, mode, start, end) {
+      start = Number(start);
+      end = Number(end);
+      let first = rawKey.substring(0, start);
+      let second = rawKey.substring(start, end);
+      let third = rawKey.substring(end, rawKey.length);
 
-      if (command == 'Slice') {
-          rawKey = rawKey.substring(0, +tokens[0]) + rawKey.substring(+tokens[1], rawKey.length)
-          console.log(rawKey);
+      if (mode == "Upper") {
+        second = second.toLocaleUpperCase();
+      } else if (mode == "Lower") {
+        second = second.toLocaleLowerCase();
       }
+      let result = first + second + third;
+      console.log(result);
+      return result;
+    },
+    Slice(rawKey, start, end) {
+      start = Number(start);
+      end = Number(end);
+      let first = rawKey.substring(0, start);
+      let second = rawKey.substring(start, end);
+      let third = rawKey.substring(end, rawKey.length);
+      let result = first + third;
+      console.log(result);
+      return result;
+    },
+  };
+  let rawKey = input.shift();
+  let line;
 
-    
-    line = input.shift(); 
+  while ((line = input.shift()) != "Generate") {
+    let [actionsName, ...params] = line.split(">>>");
+    let action = actions[actionsName];
+    rawKey = action(rawKey, ...params);
   }
   console.log(`Your activation key is: ${rawKey}`);
 }
 
 solve([
-  '134softsf5ftuni2020rockz42',
-  'Slice>>>3>>>7',
-  'Contains>>>-rock',
-  'Contains>>>-uni-',
-  'Contains>>>-rocks',
-  'Flip>>>Upper>>>2>>>8',
-  'Flip>>>Lower>>>5>>>11',
-  'Generate'
+  "134softsf5ftuni2020rockz42",
+  "Slice>>>3>>>7",
+  "Contains>>>-rock",
+  "Contains>>>-uni-",
+  "Contains>>>-rocks",
+  "Flip>>>Upper>>>2>>>8",
+  "Flip>>>Lower>>>5>>>11",
+  "Generate",
 ]);
