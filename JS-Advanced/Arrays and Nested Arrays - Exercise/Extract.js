@@ -1,15 +1,14 @@
 function solve(arr) {
-    let result = [];
-    arr.reduce((acc, c) => {
-        if (c >= acc) {
-            result.push(c)
-            acc = c;
-        }
-        return acc
-    }, Number.MIN_SAFE_INTEGER);
-    
-    return result
-    
+  const copy = arr;
+  let result = [];
+  const res = copy.reduce((a, b, i, array) => {
+    if (b >= a) {
+      result.push(b);
+      a = b;
+    }
+    return a;
+  });
+  return result;
 }
 
-console.log(solve([1, 3, 8, 4, 10, 12, 3, 2, 24])); 
+console.log(solve([1, 3, 8, 4, 10, 12, 3, 2, 24]));
