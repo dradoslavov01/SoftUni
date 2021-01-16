@@ -1,8 +1,11 @@
 function solve(arr, rotations) {
-  let result = arr;
   for (let i = 1; i <= rotations; i++) {
-    result.push(arr.shift());
+    for(let j = 0; j <= arr.length; j ++){
+        console.log(i, j);
+    }
   }
   console.log(result.join(" "));
 }
-solve(["Banana", "Orange", "Coconut", "Apple"], 15);
+solve(["7", "2", "3", "4"], 2);
+
+
