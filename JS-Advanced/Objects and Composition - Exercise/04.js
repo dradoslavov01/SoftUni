@@ -3,20 +3,20 @@ function solve(input) {
   for (const line of input) {
     let [town, product, price] = line.split(" | ");
 
-    if(!obj[product]) {
-      obj[product] = {town, price: Number(price)};
+    if (!obj[product]) {
+      obj[product] = { town, price: Number(price) };
     } else {
-      if (obj[product].price > Number(price)) {
-        obj[product] = {town, price: Number(price)};
+      if (obj[product].price < Number(price)) {
+        obj[product] = { town, price: Number(price) };
       }
     }
   }
   let arr = [];
 
   for (const product in obj) {
-    arr.push(`${product} -> ${obj[product].price} (${obj[product].town})`)
+    arr.push(`${product} -> ${obj[product].price} (${obj[product].town})`);
   }
-  return arr.join('\n')
+  return arr.join("\n");
 }
 console.log(
   solve([
