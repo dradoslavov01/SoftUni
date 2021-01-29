@@ -1,22 +1,24 @@
 function solve(...args) {
-   let obj = {};
-   let output = '';
-   args.forEach(ele => {
-      let key = typeof ele;
-      obj[key] = ele;
-   })    
-   for (const key in obj) {
-      output += `${key}: ${obj[key]}\n`
-   }
-   for (const key in obj) {
-      let type = typeof obj[key];
-      if(key == type) {
-          type = 0;
-          type++;
-          output += `${typeof obj[key]}: ${type}\n`;
-      }
-   }
+  /* let output = ''; */
+  args.forEach((ele) => {
+    console.log(`${typeof ele}: ${ele}`);
+  });
+  let types = {};
+  args.forEach((ele) => {
+    if (!types.hasOwnProperty(typeof ele)) {
+      types[typeof ele] = 1;
+    } else {
+      types[typeof ele] += 1;
+    }
+  });
+  let keys = Object.keys(types);
 
-   return output
+  keys.sort((a, b) => types[b] - types[a]);
+
+  for (let set of keys) {
+    console.log(`${set} = ${types[set]}`);
+  }
 }
-console.log(solve('cat', 'cat', 42, function () { console.log('Hello world!'); }));
+solve("cat", 42, 32, function () {
+  console.log("Hello world!");
+});
