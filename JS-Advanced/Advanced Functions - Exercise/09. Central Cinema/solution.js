@@ -49,21 +49,23 @@ function solve() {
             const btn = document.createElement("button");
             btn.textContent = "Delete";
             archiveDiv.appendChild(btn);
-            li.appendChild(archiveDiv);
-
+            li.appendChild(btn)
+            
             btn.addEventListener("click", (e) => {
               if (e.target.tagName === "BUTTON") {
                 li.parentNode.removeChild(li);
               }
             });
 
-            archive
-              .querySelectorAll("button")[1]
-              .addEventListener("click", (e) => {
+            const items = archive.querySelectorAll("button");
+            const last = items[items.length - 1];
+            last.addEventListener("click", (e) => {
                 if (e.target.tagName === "BUTTON") {
-                  ul.parentNode.removeChild(ul);
+                    ul.parentNode.replaceChild(ul.cloneNode(false), ul);
                 }
               });
+
+             
           }
         });
       }
