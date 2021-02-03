@@ -24,7 +24,7 @@ describe('mathEnforcer', () => {
             expect(mathEnforcer.subtractTen(20)).to.equal(10);
         });
         it('checking for first param is number and subtract ten to it', () => {
-            expect(mathEnforcer.subtractTen(10)).to.equal(0);
+            expect(mathEnforcer.subtractTen(10.5)).to.equal(0.5);
         });
         it('checking for first param is number and subtract ten to it', () => {
             expect(mathEnforcer.subtractTen(-10)).to.equal(-20);
@@ -44,10 +44,10 @@ describe('mathEnforcer', () => {
             expect(mathEnforcer.sum(20, 10)).to.equal(30);
         });
         it('checking for first param is number and sum', () => {
-            expect(mathEnforcer.sum(5, 5)).to.equal(10);
+            expect(mathEnforcer.sum(-5, -5)).to.equal(-10);
         });
         it('checking for first param is number and sum', () => {
-            expect(mathEnforcer.sum(3, 2)).to.equal(5);
+            expect(mathEnforcer.sum(5.5, 1.5)).to.equal(7);
         });
     });
      
