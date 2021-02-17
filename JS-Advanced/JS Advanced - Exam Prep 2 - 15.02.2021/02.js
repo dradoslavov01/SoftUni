@@ -60,9 +60,11 @@ class ChristmasDinner {
         products: dish.productList,
       };
     }
+    let output;
     for(let guest in this.guests){
-        console.log(`${guest} will eat ${res[this.guests[guest]].name}, which consists of ${res[this.guests[guest]].products.join(', ')}`);
+        output += `${guest} will eat ${res[this.guests[guest]].name}, which consists of ${res[this.guests[guest]].products.join(', ')}` + '\n'
     } 
+    return output
   }
 }
 
