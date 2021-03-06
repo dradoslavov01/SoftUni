@@ -1,0 +1,46 @@
+import { showHome } from './home.js'
+
+let main;
+let section;
+
+export function setupLogin(mainTarget, sectionTarget) {
+    main = mainTarget;
+    section = sectionTarget;
+
+    const form = section.querySelector('form');
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        const email = formData.get('email');
+        const password = formData.get('password');
+
+        const response = await fetch('http://localhost:3030/users/login' ,{
+            method: 'post',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({email, password})
+        });
+        if(response.ok) {
+            const data = await response.json();
+            sessionStorage.setItem('authToken', data.accessToken);
+            sessionStorage.setItem('userId', data._id);
+            sessionStorage.setItem('email', data.email);
+            if(email != null) {
+                [...document.querySelectorAll('nav .user')].forEach(l => l.style.display = 'block');
+                [...document.querySelectorAll('nav .guest')].forEach(l => l.style.display = 'none');
+                document.getElementById('welcome-msg').textContent = `Welcome, ${email}`
+            } else {
+                [...document.querySelectorAll('nav .user')].forEach(l => l.style.display = 'none');
+                [...document.querySelectorAll('nav .guest')].forEach(l => l.style.display = 'block');
+            }
+            
+
+            showHome();
+        }
+    })
+
+}
+
+export async function showLogin() {
+    main.innerHTML = '';
+    main.appendChild(section);
+}
