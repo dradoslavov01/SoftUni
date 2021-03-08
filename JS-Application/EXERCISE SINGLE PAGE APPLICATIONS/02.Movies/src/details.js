@@ -9,6 +9,21 @@ async function getMovieById(id) {
 }
 
 function createMovieCard(movie) {
+
+  const userId = sessionStorage.getItem('userId');
+  const controls = [];
+
+  if(userId != null) {
+    if(userId == movie._ownerId) {
+      controls.push('<a class="btn btn-danger" href="#">Delete</a>');
+      controls.push('<a class="btn btn-warning" href="#">Edit</a>')
+    } else {
+      controls.push('<a class="btn btn-primary" href="#">Like</a>');
+    }
+    controls.push('<span class="enrolled-span">Liked 1</span>');
+  }
+
+
   const element = document.createElement("div");
   element.className = "container";
   element.innerHTML = ` 
@@ -22,10 +37,7 @@ function createMovieCard(movie) {
     <div class="col-md-4 text-center">
         <h3 class="my-3 ">Movie Description</h3>
         <p>${movie.description}</p>
-        <a class="btn btn-danger" href="#">Delete</a>
-        <a class="btn btn-warning" href="#">Edit</a>
-        <a class="btn btn-primary" href="#">Like</a>
-        <span class="enrolled-span">Liked 1</span>
+        ${controls.join('')}
     </div>
 </div>`;
 

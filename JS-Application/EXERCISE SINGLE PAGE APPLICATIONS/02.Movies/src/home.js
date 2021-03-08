@@ -53,4 +53,4 @@ export async function showHome() {
   cards.forEach((c) => fragment.appendChild(c));
   conatiner.innerHTML = "";
   conatiner.appendChild(fragment);
-}
+};
