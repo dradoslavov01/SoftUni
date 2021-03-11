@@ -28,7 +28,11 @@ import { setupEdit } from "./edit.js";
     if (sessionStorage.getItem('authToken') == null) {
       [...document.querySelectorAll('nav .user')].forEach(l => l.style.display = 'none');
       [...document.querySelectorAll('nav .guest')].forEach(l => l.style.display = 'block');
-      
+    } else {
+      [...document.querySelectorAll('nav .user')].forEach(l => l.style.display = 'block');
+      [...document.querySelectorAll('nav .guest')].forEach(l => l.style.display = 'none');
+      const email = sessionStorage.getItem('email');
+      document.getElementById('welcome-msg').textContent = `Welcome, ${email}`
     }
 }
 
@@ -72,6 +76,7 @@ async function logout() {
   setupNavigation();
   showHome(); 
   setUserNav();
+
 
   
 

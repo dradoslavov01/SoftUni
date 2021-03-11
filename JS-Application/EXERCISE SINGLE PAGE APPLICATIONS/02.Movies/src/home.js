@@ -23,6 +23,7 @@ function createMoviePreview(movie) {
   return element;
 }
 
+
 let main;
 let section;
 let conatiner;

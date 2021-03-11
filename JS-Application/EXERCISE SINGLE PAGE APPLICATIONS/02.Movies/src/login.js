@@ -23,10 +23,7 @@ export function setupLogin(mainTarget, sectionTarget) {
             const data = await response.json();
             sessionStorage.setItem('authToken', data.accessToken);
             sessionStorage.setItem('userId', data._id);
-
-                [...document.querySelectorAll('nav .user')].forEach(l => l.style.display = 'block');
-                [...document.querySelectorAll('nav .guest')].forEach(l => l.style.display = 'none');
-                document.getElementById('welcome-msg').textContent = `Welcome, ${email}`
+            sessionStorage.setItem('email', data.email);
         
             showHome();
         }
