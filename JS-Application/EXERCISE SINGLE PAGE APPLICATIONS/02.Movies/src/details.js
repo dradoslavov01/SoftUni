@@ -1,5 +1,6 @@
 import { showHome } from "./home.js";
 import {e} from './dom.js'
+import {showEdit} from './edit.js'
 
 let main;
 let section;
@@ -55,7 +56,7 @@ function createMovieCard(movie, likes, ownLike) {
   if(userId != null) {
     if(userId == movie._ownerId) {
       controls.appendChild(e('a', {className: 'btn btn-danger', href: '#', onclick: (e) => deleteMovie(e, movie._id)}, 'Delete'));
-      controls.appendChild(e('a', {className: 'btn btn-warning', href: '#'}, 'Edit'));
+      controls.appendChild(e('a', {className: 'btn btn-warning', href: '#', onclick: () => showEdit(movie._id)}, 'Edit'));
     } 
       controls.appendChild(e('a', {className: 'btn btn-primary', href: '#', onclick: likeMovie}, 'Like'));
     

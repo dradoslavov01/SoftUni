@@ -24,6 +24,8 @@ export function setupLogin(mainTarget, sectionTarget) {
             sessionStorage.setItem('authToken', data.accessToken);
             sessionStorage.setItem('userId', data._id);
             sessionStorage.setItem('email', data.email);
+            [...document.querySelectorAll('nav .user')].forEach(l => l.style.display = 'block');
+            [...document.querySelectorAll('nav .guest')].forEach(l => l.style.display = 'none');
         
             showHome();
         }
