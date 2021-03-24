@@ -17,7 +17,6 @@ async function request(url, options) {
         }
        
     } catch (err) {
-        alert(err.message);
         throw err;
     }
 }
@@ -34,7 +33,7 @@ function getOptions(method = 'get', body) {
     }
 
     if(body) {
-        options.headers['Content-Type'] = 'application.json';
+        options.headers['Content-Type'] = 'application/json';
         options.body = JSON.stringify(body)
     }
 
@@ -77,7 +76,7 @@ export async function register(email, password) {
     return user  
 }
 
-export async function login() {
+export async function logout() {
     const user = await get(settings.host + '/users/logout');
 
     sessionStorage.removeItem('email', user.email);
